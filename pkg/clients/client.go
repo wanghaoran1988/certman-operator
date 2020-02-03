@@ -26,7 +26,7 @@ func NewClient(kubeClient client.Client, platfromSecret certmanv1alpha1.Platform
 	if platfromSecret.AWS != nil {
 		log.Info("build aws client")
 		// TOFIX: Region hardcoded!!!
-		return aws.NewClient(kubeClient, platfromSecret.AWS.Credentials.Name, namespace, "us-east-1")
+		return aws.NewClient(kubeClient, platfromSecret.AWS.Credentials.Name, namespace, "cn-northwest-1")
 	}
 	if platfromSecret.GCP != nil {
 		log.Info("build gcp client")

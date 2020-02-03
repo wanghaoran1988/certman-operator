@@ -330,6 +330,10 @@ func (c *awsClient) DeleteAcmeChallengeResourceRecords(reqLogger logr.Logger, cr
 // new session for the client.
 func NewClient(kubeClient client.Client, secretName, namespace, region string) (*awsClient, error) {
 	awsConfig := &aws.Config{Region: aws.String(region)}
+	if region == "cn-northwest-1" || region == "cn-north-1" {
+		endpoint := "https://api.route53.cn"
+		awsConfig.Endpoint = &endpoint
+	}
 	if secretName != "" {
 		secret := &corev1.Secret{}
 		err := kubeClient.Get(context.TODO(),
